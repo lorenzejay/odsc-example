@@ -1,0 +1,43 @@
+---
+research_speaker_background:
+  description:
+    Conduct comprehensive research on {person_name} to gather information
+    about their AI and machine learning expertise. Search for their academic publications,
+    professional experience, previous speaking engagements, industry contributions,
+    current role, and any notable AI projects or achievements. Focus on finding evidence
+    of their technical depth and communication abilities in the AI field.
+  expected_output:
+    "A detailed research report containing: professional background,
+    AI agent / agentic orchestration framework expertise and or notable publications or projects, speaking experience,
+    industry reputation, and any relevant credentials or achievements in artificial
+    intelligence"
+  agent: ai_speaker_researcher
+evaluate_odsc_speaker_qualification:
+  description:
+    "Analyze the research findings about {person_name} and evaluate their
+    qualification for speaking at ODSC AI conferences. Consider ODSC's standards
+    for speakers including: technical expertise in AI/ML, ability to engage audiences,
+    industry credibility, innovative work or insights, and potential to deliver valuable
+    content to ODSC attendees. Provide a qualification score and detailed reasoning."
+  expected_output:
+    "A qualification assessment including: overall recommendation (Highly
+    Qualified/Qualified/Needs Development/Not Qualified), scoring in key areas (technical
+    expertise, speaking experience, industry impact), specific strengths and potential
+    concerns, and suggested topics they could speak about at ODSC"
+  agent: odsc_qualification_specialist
+  context:
+    - research_speaker_background
+send_qualification_report:
+  description:
+    Create a professional, well-formatted speaker qualification report
+    for {person_name} based on the research and evaluation findings. Then send this
+    report to {slack_username} via Slack. The report should be clear, actionable,
+    and include all key qualification details in an easy-to-read format.
+  expected_output:
+    A professionally formatted report sent successfully to {slack_username}
+    on Slack, containing the speaker qualification assessment, research findings,
+    recommendation, and any next steps or considerations for ODSC program planning
+  agent: report_messenger
+  context:
+    - research_speaker_background
+    - evaluate_odsc_speaker_qualification
